@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">GroceryList</string>
+    <string name="fragment_item_name">Item</string>
+    <string name="item_cabbage">Cabbage</string>
+    <string name="item_cheese">Cheese</string>
+    <string name="item_apple">Apple</string>
+    <string name="item_salsa">Salsa</string>
+    <string name="item_bread">Bread</string>
+    <string name="save_button">Save</string>
+    <string name="new_item">New Item</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="delete_item">Delete Item</string>
+    <string name="item_amount_label">Amount:</string>
+</resources>
