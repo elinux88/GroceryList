@@ -20,7 +20,7 @@
         android:layout_gravity="top"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:adjustViewBounds="true"
-        android:src="@drawable/zamorano_cheese"
+        android:src="@mipmap/ic_launcher"
         />
 
     <EditText

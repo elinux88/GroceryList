@@ -12,7 +12,11 @@ public class Item {
     private int mAmount;
 
     public Item() {
-        mId = UUID.randomUUID();
+        this(UUID.randomUUID());
+    }
+
+    public Item(UUID id) {
+        mId = id;
         mName = "New Item";
         mAmount = 1;
     }

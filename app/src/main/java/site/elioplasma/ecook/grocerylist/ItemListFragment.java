@@ -79,6 +79,7 @@ public class ItemListFragment extends Fragment {
             mAdapter = new ItemAdapter(items);
             mItemRecyclerView.setAdapter(mAdapter);
         } else {
+            mAdapter.setItems(items);
             mAdapter.notifyDataSetChanged();
         }
     }
@@ -138,6 +139,10 @@ public class ItemListFragment extends Fragment {
         @Override
         public int getItemCount() {
             return mItems.size();
+        }
+
+        public void setItems(List<Item> items) {
+            mItems = items;
         }
     }
 }

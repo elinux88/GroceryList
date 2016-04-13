@@ -61,6 +61,14 @@ public class ItemFragment extends Fragment {
         mPhotoFile = ItemData.get(getActivity()).getPhotoFile(mItem);
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        ItemData.get(getActivity())
+                .updateItem(mItem);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
