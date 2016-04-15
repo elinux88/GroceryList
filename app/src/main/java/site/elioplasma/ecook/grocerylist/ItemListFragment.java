@@ -113,8 +113,10 @@ public class ItemListFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Intent intent = ItemActivity.newIntent(getActivity(), mItem.getId());
+            TextView nameView = (TextView) v.findViewById(R.id.list_item_item_name_text_view);
             String transitionName = getString(R.string.shared_item_name);
-            startWithTransition(getActivity(), intent, v, transitionName);
+
+            startWithTransition(getActivity(), intent, nameView, transitionName);
         }
     }
 
