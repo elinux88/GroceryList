@@ -94,7 +94,6 @@ public class ItemFragment extends Fragment {
 
         mItemAmount = (EditText) v.findViewById(R.id.item_amount_text);
         mItemAmount.setText(Integer.toString(mItem.getAmount()));
-        mItemAmount.requestFocus();
         mItemAmount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

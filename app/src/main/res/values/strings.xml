@@ -11,4 +11,5 @@
     <string name="take_picture">Take Picture</string>
     <string name="delete_item">Delete Item</string>
     <string name="item_amount_label">Amount:</string>
+    <string name="item_name_hint">Item Name</string>
 </resources>

@@ -17,7 +17,6 @@ public class Item {
 
     public Item(UUID id) {
         mId = id;
-        mName = "New Item";
         mAmount = 1;
     }
 
