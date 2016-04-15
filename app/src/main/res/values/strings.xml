@@ -12,4 +12,5 @@
     <string name="delete_item">Delete Item</string>
     <string name="item_amount_label">Amount:</string>
     <string name="item_name_hint">Item Name</string>
+    <string name="shared_item_name">Shared Item Name</string>
 </resources>

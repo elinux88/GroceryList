@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -144,10 +145,15 @@ public class ItemFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case (R.id.menu_item_take_photo):
+            case android.R.id.home:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    getActivity().finishAfterTransition();
+                }
+                return true;
+            case R.id.menu_item_take_photo:
                 startActivityForResult(mCaptureImage, REQUEST_PHOTO);
                 return true;
-            case (R.id.menu_item_delete_item):
+            case R.id.menu_item_delete_item:
                 UUID id = mItem.getId();
                 if (ItemData.get(getActivity()).deleteItem(id)) {
                     getActivity().finish();

@@ -1,9 +1,12 @@
 package site.elioplasma.ecook.grocerylist;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -110,7 +113,8 @@ public class ItemListFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Intent intent = ItemActivity.newIntent(getActivity(), mItem.getId());
-            startActivity(intent);
+            String transitionName = getString(R.string.shared_item_name);
+            startWithTransition(getActivity(), intent, v, transitionName);
         }
     }
 
@@ -144,5 +148,14 @@ public class ItemListFragment extends Fragment {
         public void setItems(List<Item> items) {
             mItems = items;
         }
+    }
+
+    private static void startWithTransition(Activity activity, Intent intent,
+                                            View sourceView, String transitionName) {
+
+        ActivityOptionsCompat options = ActivityOptionsCompat
+                .makeSceneTransitionAnimation(activity, sourceView, transitionName);
+
+        activity.startActivity(intent, options.toBundle());
     }
 }
