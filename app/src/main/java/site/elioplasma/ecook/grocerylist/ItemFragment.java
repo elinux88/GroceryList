@@ -165,7 +165,7 @@ public class ItemFragment extends Fragment {
                 return true;
             case R.id.menu_item_fetch_photo:
                 mItem.setPhotoType(Item.PHOTO_INTERNET);
-                new SearchTask().execute("food " + mItem.getName());
+                new SearchTask().execute("\"grocery " + mItem.getName() + "\"");
                 return true;
             case R.id.menu_item_delete_item:
                 UUID id = mItem.getId();
@@ -192,9 +192,15 @@ public class ItemFragment extends Fragment {
     private void updatePhotoView() {
         if (mPhotoFile == null || !mPhotoFile.exists()) {
             mItemPicture.setImageResource(R.drawable.grocery_bag);
+            mItem.setPhotoType(Item.PHOTO_DEFAULT);
         } else {
             Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
-            mItemPicture.setImageBitmap(bitmap);
+            if (bitmap != null) {
+                mItemPicture.setImageBitmap(bitmap);
+            } else {
+                mItemPicture.setImageResource(R.drawable.grocery_bag);
+                mItem.setPhotoType(Item.PHOTO_DEFAULT);
+            }
         }
     }
 
@@ -235,7 +241,9 @@ public class ItemFragment extends Fragment {
                 Log.i(TAG, "Unable to create file output stream", fnfe);
             }
 
-            mBitmap.compress(Bitmap.CompressFormat.JPEG, 85, fOut);
+            if (mBitmap != null) {
+                mBitmap.compress(Bitmap.CompressFormat.JPEG, 85, fOut);
+            }
 
             try {
                 fOut.flush();

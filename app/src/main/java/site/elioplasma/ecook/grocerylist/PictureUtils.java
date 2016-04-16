@@ -41,6 +41,9 @@ public class PictureUtils {
 
         // Read in and create bitmap
         Bitmap src = BitmapFactory.decodeFile(path, options);
+        if (src == null) {
+            return null;
+        }
 
         int width = src.getWidth();
         int height = src.getHeight();

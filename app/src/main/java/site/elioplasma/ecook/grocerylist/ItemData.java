@@ -160,12 +160,10 @@ public class ItemData {
                 "Lime",
                 "Bag O' Chips",
                 "Spinach",
-                "Cat food"
         };
         int[] itemAmounts = {
                 2, 4, 3, 1, 7,
                 2, 1, 9, 2, 5,
-                3
         };
         for (int i = 0; i < itemNames.length; i++) {
             Item item = new Item();

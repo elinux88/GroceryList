@@ -7,6 +7,7 @@ import java.util.UUID;
  */
 public class Item {
 
+    public static final int PHOTO_DEFAULT = 0;
     public static final int PHOTO_CAMERA = 1;
     public static final int PHOTO_INTERNET = 2;
 
