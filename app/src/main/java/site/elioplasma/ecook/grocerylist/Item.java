@@ -7,9 +7,13 @@ import java.util.UUID;
  */
 public class Item {
 
+    public static final int PHOTO_CAMERA = 1;
+    public static final int PHOTO_INTERNET = 2;
+
     private UUID mId;
     private String mName;
     private int mAmount;
+    private int mPhotoType;
 
     public Item() {
         this(UUID.randomUUID());
@@ -42,5 +46,13 @@ public class Item {
 
     public String getPhotoFilename() {
         return "IMG_" + getId().toString() + ".jpg";
+    }
+
+    public int getPhotoType() {
+        return mPhotoType;
+    }
+
+    public void setPhotoType(int photoType) {
+        mPhotoType = photoType;
     }
 }

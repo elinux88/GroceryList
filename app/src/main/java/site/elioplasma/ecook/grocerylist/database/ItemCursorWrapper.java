@@ -20,10 +20,12 @@ public class ItemCursorWrapper extends CursorWrapper {
         String uuidString = getString(getColumnIndex(ItemTable.Cols.UUID));
         String name = getString(getColumnIndex(ItemTable.Cols.NAME));
         int amount = getInt(getColumnIndex(ItemTable.Cols.AMOUNT));
+        int photoType = getInt(getColumnIndex(ItemTable.Cols.PHOTO_TYPE));
 
         Item item = new Item(UUID.fromString(uuidString));
         item.setName(name);
         item.setAmount(amount);
+        item.setPhotoType(photoType);
 
         return item;
     }

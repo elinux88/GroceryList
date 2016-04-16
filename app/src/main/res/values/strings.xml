@@ -9,6 +9,7 @@
     <string name="save_button">Save</string>
     <string name="new_item">New Item</string>
     <string name="take_picture">Take Picture</string>
+    <string name="fetch_picture">Fetch Picture</string>
     <string name="delete_item">Delete Item</string>
     <string name="item_amount_label">Amount:</string>
     <string name="item_name_hint">Item Name</string>

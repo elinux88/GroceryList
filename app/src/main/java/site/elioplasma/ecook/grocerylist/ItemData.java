@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import site.elioplasma.ecook.grocerylist.database.ItemDbSchema.ItemTable;
  * Created by eli on 3/2/16.
  */
 public class ItemData {
+    private static final String TAG = "ItemData";
     private static ItemData sItemData;
 
     private Context mContext;
@@ -53,13 +55,21 @@ public class ItemData {
     }
 
     public File getPhotoFile(Item item) {
-        File externalFilesDir = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File filesDir = null;
 
-        if (externalFilesDir == null) {
+        switch (item.getPhotoType()) {
+            case Item.PHOTO_INTERNET:
+                filesDir = mContext.getFilesDir();
+                break;
+            default:
+                filesDir = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        }
+
+        if (filesDir == null) {
             return null;
         }
 
-        return new File(externalFilesDir, item.getPhotoFilename());
+        return new File(filesDir, item.getPhotoFilename());
     }
 
     public List<Item> getItems() {
@@ -119,6 +129,7 @@ public class ItemData {
         values.put(ItemTable.Cols.UUID, item.getId().toString());
         values.put(ItemTable.Cols.NAME, item.getName());
         values.put(ItemTable.Cols.AMOUNT, Integer.toString(item.getAmount()));
+        values.put(ItemTable.Cols.PHOTO_TYPE, Integer.toString(item.getPhotoType()));
 
         return values;
     }

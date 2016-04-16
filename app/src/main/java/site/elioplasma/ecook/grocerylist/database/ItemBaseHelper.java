@@ -23,7 +23,8 @@ public class ItemBaseHelper extends SQLiteOpenHelper {
                 " _id integer primary key autoincrement, " +
                 ItemTable.Cols.UUID + ", " +
                 ItemTable.Cols.NAME + ", " +
-                ItemTable.Cols.AMOUNT +
+                ItemTable.Cols.AMOUNT + ", " +
+                ItemTable.Cols.PHOTO_TYPE +
                 ")"
         );
     }
