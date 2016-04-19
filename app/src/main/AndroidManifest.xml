@@ -7,6 +7,8 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18"
         />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -20,6 +22,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         >
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"
+            />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="PLACE_API_KEY_HERE"
+            />
+
         <activity
             android:name=".ItemListActivity"
             >
@@ -33,6 +44,17 @@
             android:name=".ItemActivity"
             android:label="@string/fragment_item_name"
             android:parentActivityName=".ItemListActivity"
+            >
+        </activity>
+        <activity
+            android:name=".PlaceListActivity"
+            android:label="@string/place_list_name"
+            >
+        </activity>
+        <activity
+            android:name=".PlaceActivity"
+            android:label="@string/fragment_place_name"
+            android:parentActivityName=".PlaceListActivity"
             >
         </activity>
     </application>

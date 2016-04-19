@@ -5,15 +5,15 @@
     >
 
     <item
-        android:id="@+id/menu_item_new_item"
+        android:id="@+id/menu_item_new_place"
         android:icon="@drawable/ic_menu_add"
-        android:title="@string/new_item"
+        android:title="@string/new_place"
         app:showAsAction="ifRoom|withText"
         />
 
     <item
-        android:id="@+id/menu_item_view_places"
-        android:title="@string/view_places"
+        android:id="@+id/menu_item_view_items"
+        android:title="@string/view_items"
         app:showAsAction="never"
         />
 

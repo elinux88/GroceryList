@@ -17,6 +17,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.ui.PlacePicker;
+
 import java.util.List;
 
 /**
@@ -68,6 +72,10 @@ public class ItemListFragment extends Fragment {
                 Intent intent = ItemActivity
                         .newIntent(getActivity(), item.getId());
                 startActivity(intent);
+                return true;
+            case R.id.menu_item_view_places:
+                Intent i = new Intent(getActivity(), PlaceListActivity.class);
+                startActivity(i);
                 return true;
             default:
                 return super.onOptionsItemSelected(menuItem);

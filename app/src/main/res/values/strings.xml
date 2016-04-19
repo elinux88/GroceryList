@@ -1,17 +1,21 @@
 <resources>
     <string name="app_name">GroceryList</string>
+    <string name="item_list_name">GroceryList Items</string>
+    <string name="place_list_name">GroceryList Places</string>
+
     <string name="fragment_item_name">Item</string>
-    <string name="item_cabbage">Cabbage</string>
-    <string name="item_cheese">Cheese</string>
-    <string name="item_apple">Apple</string>
-    <string name="item_salsa">Salsa</string>
-    <string name="item_bread">Bread</string>
-    <string name="save_button">Save</string>
     <string name="new_item">New Item</string>
+    <string name="view_items">View Items</string>
     <string name="take_picture">Take Picture</string>
     <string name="fetch_picture">Fetch Picture</string>
     <string name="delete_item">Delete Item</string>
     <string name="item_amount_label">Amount:</string>
     <string name="item_name_hint">Item Name</string>
     <string name="shared_item_name">Shared Item Name</string>
+
+    <string name="fragment_place_name">Place</string>
+    <string name="new_place">New Place</string>
+    <string name="view_places">View Places</string>
+    <string name="delete_place">Delete Place</string>
+    <string name="shared_place_name">Shared Place Name</string>
 </resources>

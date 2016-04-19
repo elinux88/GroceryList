@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <item
+        android:id="@+id/menu_item_fetch_photo"
+        android:icon="@drawable/ic_menu_download"
+        android:title="@string/fetch_picture"
+        app:showAsAction="ifRoom|withText"
+        />
+
+    <item
+        android:id="@+id/menu_item_delete_place"
+        android:icon="@drawable/ic_menu_delete"
+        android:title="@string/delete_place"
+        app:showAsAction="ifRoom|withText"
+        />
+
+</menu>
