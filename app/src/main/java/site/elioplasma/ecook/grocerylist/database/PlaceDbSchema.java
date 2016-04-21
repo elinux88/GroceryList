@@ -11,6 +11,8 @@ public class PlaceDbSchema {
             public static final String ID = "id";
             public static final String NAME = "name";
             public static final String ADDRESS = "address";
+            public static final String ATTRIBUTIONS = "attributions";
+            public static final String PHOTO_TYPE = "photo_type";
         }
     }
 }

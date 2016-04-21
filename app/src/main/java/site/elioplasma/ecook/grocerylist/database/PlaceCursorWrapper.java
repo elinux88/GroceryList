@@ -16,12 +16,16 @@ public class PlaceCursorWrapper extends CursorWrapper {
 
     public StorePlace getPlace() {
         String id = getString(getColumnIndex(PlaceTable.Cols.ID));
-        CharSequence name = getString(getColumnIndex(PlaceTable.Cols.NAME));
-        CharSequence address = getString(getColumnIndex(PlaceTable.Cols.ADDRESS));
+        String name = getString(getColumnIndex(PlaceTable.Cols.NAME));
+        String address = getString(getColumnIndex(PlaceTable.Cols.ADDRESS));
+        String attributions = getString(getColumnIndex(PlaceTable.Cols.ATTRIBUTIONS));
+        int photoType = getInt(getColumnIndex(PlaceTable.Cols.PHOTO_TYPE));
 
         StorePlace place = new StorePlace(id);
         place.setName(name);
         place.setAddress(address);
+        place.setAttributions(attributions);
+        place.setPhotoType(photoType);
 
         return place;
     }

@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Environment;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -52,7 +53,15 @@ public class PlaceData {
     }
 
     public File getPhotoFile(StorePlace storePlace) {
-        File filesDir = mContext.getFilesDir();
+        File filesDir = null;
+
+        switch (storePlace.getPhotoType()) {
+            case StorePlace.PHOTO_INTERNET:
+                filesDir = mContext.getFilesDir();
+                break;
+            default:
+                filesDir = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        }
 
         if (filesDir == null) {
             return null;
@@ -116,8 +125,10 @@ public class PlaceData {
     private static ContentValues getContentValues(StorePlace storePlace) {
         ContentValues values = new ContentValues();
         values.put(PlaceTable.Cols.ID, storePlace.getId());
-        values.put(PlaceTable.Cols.NAME, (String) storePlace.getName());
-        values.put(PlaceTable.Cols.ADDRESS, (String) storePlace.getAddress());
+        values.put(PlaceTable.Cols.NAME, storePlace.getName());
+        values.put(PlaceTable.Cols.ADDRESS, storePlace.getAddress());
+        values.put(PlaceTable.Cols.ATTRIBUTIONS, storePlace.getAttributions());
+        values.put(PlaceTable.Cols.PHOTO_TYPE, Integer.toString(storePlace.getPhotoType()));
 
         return values;
     }
@@ -137,20 +148,22 @@ public class PlaceData {
     }
 
     private void initPlaceList() {
-        CharSequence[] placeNames = {
-                "Harmons",
-                "Walmart",
+        String[] placeNames = {
+                "Harmons Neighborhood Grocer",
+                "Walmart Supercenter",
                 "Albertsons",
         };
-        CharSequence[] placeAddresses = {
-                "1180 E 700 S",
-                "625 W Telegraph St",
-                "915 Red Cliffs Dr"
+        String[] placeAddresses = {
+                "1189 E 700 S, St George, UT 84790, United States",
+                "625 W Telegraph St, Washington, UT 84780, United States",
+                "915 Red Cliffs Dr, Washington, UT 84780, United States"
         };
+        String[] placeAttributions = {"", "", "",};
         for (int i = 0; i < placeNames.length; i++) {
             StorePlace storePlace = new StorePlace();
             storePlace.setName(placeNames[i]);
             storePlace.setAddress(placeAddresses[i]);
+            storePlace.setAttributions(placeAttributions[i]);
             addPlace(storePlace);
         }
     }

@@ -8,6 +8,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils.SimpleStringSplitter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -122,7 +123,10 @@ public class PlaceListFragment extends Fragment {
         public void bindPlace(StorePlace storePlace) {
             mPlace = storePlace;
             mNameTextView.setText(mPlace.getName());
-            mAddressTextView.setText(mPlace.getAddress());
+
+            SimpleStringSplitter sss = new SimpleStringSplitter(',');
+            sss.setString(mPlace.getAddress());
+            mAddressTextView.setText(sss.next() + ", " + sss.next());
         }
 
         @Override
@@ -185,8 +189,8 @@ public class PlaceListFragment extends Fragment {
         if (requestCode == PLACE_PICKER_REQUEST) {
             Place place = PlacePicker.getPlace(getActivity(), data);
             String id = place.getId();
-            CharSequence name = place.getName();
-            CharSequence address = place.getAddress();
+            String name = place.getName().toString();
+            String address = place.getAddress().toString();
             String attributions = (String) place.getAttributions();
             if (attributions == null) {
                 attributions = "";
@@ -195,7 +199,7 @@ public class PlaceListFragment extends Fragment {
             StorePlace storePlace = new StorePlace(id);
             storePlace.setName(name);
             storePlace.setAddress(address);
-            //storePlace.setAttributions(attributions);
+            storePlace.setAttributions(attributions);
 
             PlaceData.get(getActivity()).addPlace(storePlace);
 

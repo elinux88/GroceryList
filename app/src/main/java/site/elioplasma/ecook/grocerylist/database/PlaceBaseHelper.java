@@ -23,7 +23,9 @@ public class PlaceBaseHelper extends SQLiteOpenHelper {
                 " _id integer primary key autoincrement, " +
                 PlaceTable.Cols.ID + ", " +
                 PlaceTable.Cols.NAME + ", " +
-                PlaceTable.Cols.ADDRESS +
+                PlaceTable.Cols.ADDRESS + ", " +
+                PlaceTable.Cols.ATTRIBUTIONS + ", " +
+                PlaceTable.Cols.PHOTO_TYPE +
                 ")"
         );
     }

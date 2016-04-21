@@ -2,14 +2,17 @@ package site.elioplasma.ecook.grocerylist;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -41,7 +44,9 @@ public class PlaceFragment extends Fragment {
     private File mPhotoFile;
     private TextView mPlaceName;
     private TextView mPlaceAddress;
+    private TextView mPlaceAttributions;
     private ImageView mPlacePicture;
+    final Intent mCaptureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
     public static PlaceFragment newInstance(String placeId) {
         Bundle args = new Bundle();
@@ -80,6 +85,18 @@ public class PlaceFragment extends Fragment {
 
         mPlaceAddress = (TextView) v.findViewById(R.id.place_address_view);
         mPlaceAddress.setText(mPlace.getAddress());
+        mPlaceAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + mPlace.getAddress());
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
+            }
+        });
+
+        mPlaceAttributions = (TextView) v.findViewById(R.id.place_attributions_view);
+        mPlaceAttributions.setText(Html.fromHtml(mPlace.getAttributions()));
 
         mPlacePicture = (ImageView) v.findViewById(R.id.place_picture_view);
         updatePhotoView();
@@ -91,6 +108,17 @@ public class PlaceFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_place, menu);
+
+        MenuItem photoItem = menu.findItem(R.id.menu_item_take_photo);
+        PackageManager packageManager = getActivity().getPackageManager();
+
+        boolean canTakePhoto = mPhotoFile != null && mCaptureImage.resolveActivity(packageManager) != null;
+        photoItem.setVisible(canTakePhoto);
+
+        if (canTakePhoto) {
+            Uri uri = Uri.fromFile(mPhotoFile);
+            mCaptureImage.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        }
     }
 
     @Override
@@ -101,8 +129,13 @@ public class PlaceFragment extends Fragment {
                     getActivity().finishAfterTransition();
                 }
                 return true;
+            case R.id.menu_item_take_photo:
+                mPlace.setPhotoType(Item.PHOTO_CAMERA);
+                startActivityForResult(mCaptureImage, REQUEST_PHOTO);
+                return true;
             case R.id.menu_item_fetch_photo:
-                new SearchTask().execute("\"store " + mPlace.getName() + "\"");
+                mPlace.setPhotoType(Item.PHOTO_INTERNET);
+                new SearchTask().execute(mPlace.getName());
                 return true;
             case R.id.menu_item_delete_place:
                 String id = mPlace.getId();
@@ -129,12 +162,14 @@ public class PlaceFragment extends Fragment {
     private void updatePhotoView() {
         if (mPhotoFile == null || !mPhotoFile.exists()) {
             mPlacePicture.setImageResource(R.drawable.grocery_bag);
+            mPlace.setPhotoType(Item.PHOTO_DEFAULT);
         } else {
             Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
             if (bitmap != null) {
                 mPlacePicture.setImageBitmap(bitmap);
             } else {
                 mPlacePicture.setImageResource(R.drawable.grocery_bag);
+                mPlace.setPhotoType(Item.PHOTO_DEFAULT);
             }
         }
     }

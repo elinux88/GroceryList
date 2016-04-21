@@ -7,9 +7,15 @@ import java.util.UUID;
  */
 public class StorePlace {
 
+    public static final int PHOTO_DEFAULT = 0;
+    public static final int PHOTO_CAMERA = 1;
+    public static final int PHOTO_INTERNET = 2;
+
     private String mId;
-    private CharSequence mName;
-    private CharSequence mAddress;
+    private String mName;
+    private String mAddress;
+    private String mAttributions;
+    private int mPhotoType;
 
     public StorePlace() {
         this(UUID.randomUUID().toString());
@@ -27,23 +33,39 @@ public class StorePlace {
         mId = id;
     }
 
-    public CharSequence getName() {
+    public String getName() {
         return mName;
     }
 
-    public void setName(CharSequence name) {
+    public void setName(String name) {
         mName = name;
     }
 
-    public CharSequence getAddress() {
+    public String getAddress() {
         return mAddress;
     }
 
-    public void setAddress(CharSequence address) {
+    public void setAddress(String address) {
         mAddress = address;
+    }
+
+    public String getAttributions() {
+        return mAttributions;
+    }
+
+    public void setAttributions(String attributions) {
+        mAttributions = attributions;
     }
 
     public String getPhotoFilename() {
         return "IMG_" + getId() + ".jpg";
+    }
+
+    public int getPhotoType() {
+        return mPhotoType;
+    }
+
+    public void setPhotoType(int photoType) {
+        mPhotoType = photoType;
     }
 }
